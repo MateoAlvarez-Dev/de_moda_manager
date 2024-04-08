@@ -32,4 +32,21 @@ public class Database {
         return this.connection;
     }
 
+    public void disconnect(){
+        try{
+            if(this.connection != null){
+                this.connection.close();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error while disconnecting... " + e.getMessage());
+        }
+    }
+
+    public static Database getInstance(){
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
+    }
+
 }
