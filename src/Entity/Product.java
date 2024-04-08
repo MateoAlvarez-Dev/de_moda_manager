@@ -47,6 +47,10 @@ public class Product implements EntityInterface {
         this.stock = stock;
     }
 
+    public int getStartIndex(){
+        return 1;
+    }
+
     @Override
     public String[] getGetters() {
         return new String[]{ "getId", "getProduct_name", "getPrice", "getId_shop", "getStock" };

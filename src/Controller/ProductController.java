@@ -1,13 +1,16 @@
 package Controller;
 
 import Entity.Product;
+import Entity.Shop;
 import Model.ProductModel;
+import Model.ShopModel;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
 public class ProductController {
     private ProductModel productModel;
+    private ShopModel shopModel = new ShopModel();
 
     public ProductController(){
         this.productModel = new ProductModel();
@@ -18,7 +21,7 @@ public class ProductController {
 
         String product_name = JOptionPane.showInputDialog(null, "Insert the product name: ");
         double price = Double.parseDouble(JOptionPane.showInputDialog("Insert the product price: "));
-        int id_shop = Integer.parseInt(JOptionPane.showInputDialog("Insert the shop ID: "));
+        int id_shop = Integer.parseInt(JOptionPane.showInputDialog(shopModel.getShops(new Shop()) + "Insert the shop ID: "));
         int stock = Integer.parseInt(JOptionPane.showInputDialog("Insert the amount of products in stock"));
 
         product.setProduct_name(product_name);

@@ -67,6 +67,10 @@ public class Buy implements EntityInterface {
         this.str_product = str_product;
     }
 
+    public int getStartIndex(){
+        return 2;
+    }
+
     @Override
     public String[] getGetters() {
         return new String[]{ "getId", "getBuy_date", "getAmount", "getId_customer", "getId_product" };

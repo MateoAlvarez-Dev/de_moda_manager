@@ -1,5 +1,6 @@
 package Model;
 
+import Database.Database;
 import Entity.Customer;
 
 import javax.swing.*;
@@ -8,6 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CustomerModel extends MainModel{
+
+    private Database database;
+
+    public CustomerModel(){
+        this.database = Database.getInstance();
+    }
 
     public ArrayList<Customer> search(Object object, String[] searchFields, String searchTerm){
         ResultSet result = super.find(object, searchFields, searchTerm);
@@ -28,6 +35,7 @@ public class CustomerModel extends MainModel{
             JOptionPane.showMessageDialog(null, "Error while reading the data... " + e.getMessage());
         }
 
+        this.database.disconnect();
         return customers;
     }
 
@@ -49,6 +57,7 @@ public class CustomerModel extends MainModel{
             JOptionPane.showMessageDialog(null, "Error while reading the data... " + e.getMessage());
         }
 
+        this.database.disconnect();
         return customer;
     }
 

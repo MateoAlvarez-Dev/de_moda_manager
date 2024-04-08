@@ -38,6 +38,10 @@ public class Customer implements EntityInterface {
         this.email = email;
     }
 
+    public int getStartIndex(){
+        return 1;
+    }
+
     @Override
     public String[] getGetters() {
         return new String[]{ "getId", "getCustomer_name", "getCustomer_last_name", "getEmail" };

@@ -1,5 +1,6 @@
 package Model;
 
+import Database.Database;
 import Entity.Buy;
 
 import javax.swing.*;
@@ -8,6 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BuyModel extends MainModel{
+
+    private Database database;
+
+    public BuyModel(){
+        this.database = Database.getInstance();
+    }
 
     public ArrayList<Buy> search(Object object, String[] searchFields, String searchTerm){
         ResultSet result = super.find(object, searchFields, searchTerm);
@@ -29,11 +36,12 @@ public class BuyModel extends MainModel{
             JOptionPane.showMessageDialog(null, "Error while reading the data... " + e.getMessage());
         }
 
+        this.database.disconnect();
         return buys;
     }
 
-    public ArrayList<Buy> searchByProduct(Object object, int product_id){
-        ResultSet result = super.find(object, "SELECT b.id, b.buy_date, b.amount, c.customer_name as 'customer', p.product_name as 'product' FROM buys b "
+    public ArrayList<Buy> searchByProduct(int product_id){
+        ResultSet result = super.customQuery("SELECT b.id, b.buy_date, b.amount, c.customer_name as 'customer', p.product_name as 'product' FROM buys b "
                 + "INNER JOIN products p ON p.id = b.id_product "
                 + "INNER JOIN customers c ON c.id = b.id_customer "
                 + "WHERE b.id_product = " + product_id
@@ -58,6 +66,7 @@ public class BuyModel extends MainModel{
             JOptionPane.showMessageDialog(null, "Error while reading the data... " + e.getMessage());
         }
 
+        this.database.disconnect();
         return buys;
     }
 

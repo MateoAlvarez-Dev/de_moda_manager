@@ -50,7 +50,7 @@ public class MainModel implements CRUD{
         return result;
     }
 
-    public ResultSet find(Object obj, String customSQL){
+    public ResultSet customQuery(String customSQL){
         Connection conn = this.database.connect();
         ResultSet result = null;
 
@@ -206,8 +206,9 @@ public class MainModel implements CRUD{
 
         try{
             String[] getterMethods = (String[]) obj.getClass().getMethod("getGetters").invoke(obj);
+            int startIndex = (int) obj.getClass().getMethod("getStartIndex").invoke(obj);
 
-            for(int i = 1; i < getterMethods.length; i++){
+            for(int i = startIndex; i < getterMethods.length; i++){
 
                 String methodName = getterMethods[i];
                 Method method = obj.getClass().getMethod(methodName);
